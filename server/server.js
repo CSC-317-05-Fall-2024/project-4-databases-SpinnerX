@@ -29,6 +29,7 @@ app.get('/', (req, res) => {
     console.log(req)
 });
 
+
 // new_restaurant page call (.html call)
 // Is just going to be adding our new restaurants here.
 app.get("/new_restaurant", (req, res) => {
@@ -52,6 +53,7 @@ app.get('/attractions', (req, res) => {
 });
 
 app.use("/attraction", attractionRouter);
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
