@@ -2,6 +2,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { restaurantRouter } from './routes/restaurant_rout.js';
 import { attractionRouter } from './routes/attractions.js'
 import {getRestaurants} from './data/restaurants.js';
 const app = express();
@@ -18,8 +19,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'));
 
-// app.use(express.json())
-// app.use("/api", router);
+app.use(express.json())
+app.use("/restaurant_rout", restaurantRouter);
 
 // acts as our entry point and our main to get responses from our server.
 // where we upload index.html as our home page
@@ -36,13 +37,12 @@ app.get("/new_restaurant", (req, res) => {
 
 // restaurant page (.html call)
 app.get('/restaurant', (req, res) => {
-
     const restaurantData = getRestaurants();
     console.log(restaurantData);
     
-    res.render('restaurants', { restaurantData });
     // Uses our new_restaurant.ejs in views/ directory
-    // res.render('restaurants.ejs', { restaurantData });
+    res.render('restaurants', { restaurantData });
+
 });
 
 // attractions page (.html call)
