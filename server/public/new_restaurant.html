@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Restaurant Form</title>
+    <!-- Setting CSS style for our website -->
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    </style>
+</head>
+<body>
+    <!-- Creating components for our navigation bar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/attractions">Attractions</a>
+        <a href="/restaurant">Restaurants</a>
+        <a href="/new_restaurant">New Restaurant</a>
+    </div>
+    <div class="form-container">
+        <h1>Create New Restaurant Form</h1>
+        <form id="restaurantForm">
+            <!-- Per component of our restaurant formn we set them as a requirement to the user. -->
+            <label for="restaurantName">Restaurant Name:</label>
+            <input type="text" id="restaurantName" name="restaurantName" required>
+            
+            <label for="phoneNumber">Phone Number:</label>
+            <input type="text" id="phoneNumber" name="phoneNumber" required>
+            
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required>
+            
+            <label for="photoUrl">Photo URL:</label>
+            <input type="text" id="photoUrl" name="photoUrl">
+            
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div class="card-container" id="cardContainer"></div>
+    <!-- Script for handling users click events on the submission -->
+    <script src="scripts/restaurantSubmit.js"></script>
+    
+
+</body>
+</html>
