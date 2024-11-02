@@ -2,8 +2,9 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { restaurantRouter } from './routes/restaurant_rout.js';
-import { attractionRouter } from './routes/attractions.js'
+// import { restaurantRouter } from './routes/restaurant_rout.js';
+import { attractionRouter } from './routes/attractions.js';
+import { restaurantRouter } from './routes/api.js';
 import {getRestaurants} from './data/restaurants.js';
 const app = express();
 
@@ -20,7 +21,7 @@ app.set('view engine', 'ejs')
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.json())
-app.use("/restaurant_rout", restaurantRouter);
+app.use("/api", restaurantRouter);
 
 // acts as our entry point and our main to get responses from our server.
 // where we upload index.html as our home page
@@ -30,12 +31,13 @@ app.get('/', (req, res) => {
 });
 
 // new_restaurant page call (.html call)
+// Is just going to be adding our new restaurants here.
 app.get("/new_restaurant", (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'new_restaurant.html'));
-    console.log("new restaurant tagged!");
 });
 
 // restaurant page (.html call)
+// Will be displaying all of our restaurants that are added and not the items deleted.
 app.get('/restaurant', (req, res) => {
     const restaurantData = getRestaurants();
     console.log(restaurantData);

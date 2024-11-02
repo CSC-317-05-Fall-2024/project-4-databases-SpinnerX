@@ -10,6 +10,7 @@ router.post('/restaurants', (req, res) => {
 });
 
 router.delete('/restaurants/:id', (req, res) => {
+    console.log("delete router called");
     const restaurantId = parseInt(req.params.id, 10);
     const isDeleted = deleteRestaurant(restaurantId);
     

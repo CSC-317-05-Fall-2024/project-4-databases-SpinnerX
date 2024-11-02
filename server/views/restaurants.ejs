@@ -6,6 +6,7 @@
     <title>New Restaurant Form</title>
     <!-- Setting CSS style for our website -->
     <link rel="stylesheet" href="styles.css">
+    <script src="scripts/deleteRestaurants.js"></script>
     <style>
     </style>
 </head>
@@ -18,20 +19,22 @@
         <a href="/restaurant">Restaurants</a>
         <a href="/new_restaurant">New Restaurant</a>
     </div>
-    <div class="card-container" id="cardContainer"></div>
+    <!-- <div class="card-container" id="cardContainer"></div> -->
     <!-- Script for handling users click events on the submission -->
     <% for (let i = 0; i < restaurantData.length; i++) { %>
     <article class="restaurant-grid">
         <img src="<% restaurantData[i].photo %>">
         <div class="card content">
+            <button class="deleteBtn" id="<%= restaurantData.id %>">Delete</button>
+            <p> <%= restaurantData[i].id %> </p>
             <p> <%= restaurantData[i].name %></p>
             <p> <%= restaurantData[i].address %></p>
             <p> <%= restaurantData[i].phone %></p>
             <img src="<%= restaurantData[i].photo %>"/>
-
-            <span class="remove-btn">X</span>
-            <!-- <button id="delete_restaurant-<%= restaurantData[i].id %>"> X </button> -->
+            <!-- <span class="remove-btn">X</span> -->
         </div>
+
+
 
     </article>
     <% } %>

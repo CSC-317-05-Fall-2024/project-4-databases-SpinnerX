@@ -6,19 +6,17 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Target the button by its ID
     console.log("Reloaded DOM");
-    // Add a click event listener to the button
-   
+    
+    // How we submit items to the restaurant website.
     const form = document.getElementById('restaurantForm');
     form.addEventListener('submit', async function(event){
         event.preventDefault();
         console.log("Submit Clicked!");
 
-        // console.log("Submit Clicked!");
-
         const name = document.getElementById('restaurantName').value;
         const phone = document.getElementById('phoneNumber').value;
         const address = document.getElementById('address').value;
-        const photoUrl = document.getElementById('photoUrl').value || 'https://picsum.photos/200/300'; // Fallback image
+        const photo = document.getElementById('photoUrl').value || 'https://picsum.photos/200/300'; // Fallback image
 
         try {
             const response = await fetch('api/restaurants', {
@@ -26,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({name, address, phone, photoUrl}),
+                body: JSON.stringify({name, address, phone, photo}),
             });
 
             if (response.ok) {
@@ -40,16 +38,11 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error('Error:', error);
         }
 
+
        this.reset();
 
     });
-
-
-    // const container = document.querySelector('.cardContainer');
-    // const spans = document.querySelectorAll('span');
-    
-    //     for(let span of spans){
-    //         console.log(span.id);
-    //     }
-
 });
+
+
+

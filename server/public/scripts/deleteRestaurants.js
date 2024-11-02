@@ -1,12 +1,38 @@
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Target the button by its ID
-   
-    // Add a click event listener to the button
+    console.log("Reloaded restaurants");
     
-     const form = document.getElementById('restaurantForm');
+    const remove_button = document.querySelectorAll('.deleteBtn');
+    // const remove_button = document.querySelector('.deleteBtn');
+    
+    remove_button.forEach(button => {
+        button.addEventListener('click', async function(event){
+            console.log("Remove Button clicked!");
+            const button = event.target;
+            const id = button.dataset.id;
+            console.log("ID:");
+            console.log(id);
 
-    form.addEventListener('remove', function(event){
-        console.log("Removed Clicked!");
+            if(id){
+                try{
+                    const response = await fetch(`/api/restaurants/:${id}`, {
+                        method: 'Delete'
+                    });
+
+                    if (response.ok) {
+                        button.closest('.restaurant-grid').remove();  
+                        console.log(`Restaurant with ID ${id} deleted successfully.`);
+
+                        window.location.reload();
+                    } else {
+                        console.error(`Failed to delete restaurant with ID ${id}.`);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            }
+    
+        });
     });
-
 });
+
