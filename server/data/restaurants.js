@@ -1,13 +1,3 @@
-// Fill this in
-// let restuarantData = [
-//     {
-//         "id": 0,
-//         "name": "...",
-//         "phone": "...",
-//         "address": "..."
-//     },
-//     etc ...
-// ];
 let restaurantData = [
     {
         "id": 0,
