@@ -25,17 +25,13 @@
     <article class="restaurant-grid">
         <img src="<% restaurantData[i].photo %>">
         <div class="card content">
-            <button class="deleteBtn" id="<%= restaurantData[i].id %>">Delete</button>
             <p> <%= restaurantData[i].id %> </p>
             <p> <%= restaurantData[i].name %></p>
             <p> <%= restaurantData[i].address %></p>
             <p> <%= restaurantData[i].phone %></p>
             <img src="<%= restaurantData[i].photo %>"/>
-            <!-- <span class="remove-btn">X</span> -->
+            <button class="deleteBtn" id="<%= restaurantData[i].id %>">Delete</button>
         </div>
-
-
-
     </article>
     <% } %>
 </body>

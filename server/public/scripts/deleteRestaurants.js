@@ -9,7 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', async function(event){
             const button = event.target;
             const id = button.id;
-
+        
+            // Should check if the id we are passing is valid before removing that specific id.
             if(id){
                 try{
                     const response = await fetch(`/api/restaurants/:${id}`, {

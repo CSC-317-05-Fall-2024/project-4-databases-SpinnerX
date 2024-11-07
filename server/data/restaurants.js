@@ -1,3 +1,5 @@
+import {pool} from "../config/database.js";
+
 let restaurantData = [
     {
         "id": 0,
@@ -41,14 +43,16 @@ const getRestaurant = (id) => {
 };
 
 // Create a new restaurant entry
-const createRestaurant = (newRestaurant) => {
-    const new_restaurant_data = {
-        id: getNextId(),
-        ...newRestaurant
-    }
-
-    restaurantData.push(new_restaurant_data);
-    return new_restaurant_data;
+const createRestaurant = async (newRestaurant) => {
+    // const new_restaurant_data = {
+    //     id: getNextId(),
+    //     ...newRestaurant
+    // }
+    const { name, phone, address, photoUrl } = newRestaurant;
+    const created_restaurant = await pool.query('INSERT INTO restaurants ( name, phone, address, photo) VALUES ($1, $2, $3, $4) RETURNING *', [name, phone, address, photoUrl]);
+    // console.log(`Results ====> ${created_restaurant}`);
+    // restaurantData.push(new_restaurant_data);
+    // return new_restaurant_data;
 };
 
 // Delete a restaurant by id

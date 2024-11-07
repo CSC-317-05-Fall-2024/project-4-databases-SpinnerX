@@ -2,17 +2,16 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-// import { restaurantRouter } from './routes/restaurant_rout.js';
 import { attractionRouter } from './routes/attractions.js';
 import { restaurantRouter } from './routes/api.js';
-import {getRestaurants} from './data/restaurants.js';
+import { getRestaurants } from './data/restaurants.js';
+
 const app = express();
 
 const PORT = process.env.PORT || 9000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -42,7 +41,7 @@ app.get('/restaurant', (req, res) => {
     const restaurantData = getRestaurants();
     console.log(restaurantData);
     
-    // Uses our new_restaurant.ejs in views/ directory
+    // Uses our restaurants.ejs in views directory to use our restaurant data from restaurants.js
     res.render('restaurants', { restaurantData });
 
 });
@@ -51,6 +50,7 @@ app.get('/restaurant', (req, res) => {
 app.get('/attractions', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'attractions.html'));
 });
+
 app.use("/attraction", attractionRouter);
 
 app.listen(PORT, () => {
