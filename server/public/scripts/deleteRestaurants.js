@@ -6,30 +6,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const remove_button = document.querySelectorAll('.deleteBtn');
         
     remove_button.forEach(button => {
-        button.addEventListener('click', async function(event){
-            const button = event.target;
-            const id = button.id;
-        
-            // Should check if the id we are passing is valid before removing that specific id.
-            if(id){
-                try{
-                    const response = await fetch(`/api/restaurants/:${id}`, {
-                        method: 'DELETE'
-                    });
+        button.addEventListener('click', function(){
+            const restaurantCard = button.parentElement;
 
-                    if (response.ok) {
-                        button.closest('.restaurant-grid').remove();  
-                        console.log(`Restaurant with ID ${id} deleted successfully.`);
-                        
-                        //! @note Used for reloading the current window.
-                        // window.location.reload();
-                    } else {
-                        console.error(`Failed to delete restaurant with ID ${id}.`);
-                    }
-                } catch (error) {
-                    console.error('Error:', error);
+            const restaurantId = restaurantCard.getAttribute('data-id');
+
+            fetch(`/api/restaurants/${restaurantId}`, {  
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to delete restaurant');
                 }
-            }
+                restaurantCard.remove();  
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+
     
         });
     });

@@ -19,20 +19,20 @@
         <a href="/restaurant">Restaurants</a>
         <a href="/new_restaurant">New Restaurant</a>
     </div>
-    <!-- <div class="card-container" id="cardContainer"></div> -->
-    <!-- Script for handling users click events on the submission -->
-    <% for (let i = 0; i < restaurantData.length; i++) { %>
-    <article class="restaurant-grid">
-        <img src="<% restaurantData[i].photo %>">
-        <div class="card content">
-            <p> <%= restaurantData[i].id %> </p>
-            <p> <%= restaurantData[i].name %></p>
-            <p> <%= restaurantData[i].address %></p>
-            <p> <%= restaurantData[i].phone %></p>
-            <img src="<%= restaurantData[i].photo %>"/>
-            <button class="deleteBtn" id="<%= restaurantData[i].id %>">Delete</button>
-        </div>
-    </article>
-    <% } %>
+    <div class="card-container" id="cardContainer"></div>
+    <div class="restaurant-list">
+        <!-- restaurantData is defined by our javascript that renders our data get sent to this .ejs file. -->
+        <% restaurantData.forEach(function(restaurant) { %>
+            <div class="restaurant-card" data-id="<%= restaurant.id %>">
+                <a href="/restaurants/<%= restaurant.id %>" class="restaurant-link">
+                    <h2><%= restaurant.name %></h2>
+                    <p><strong>Address:</strong> <%= restaurant.address %></p>
+                    <img src="<%= restaurant.photo %>" alt="<%= restaurant.name %>" class="restaurantimg">
+                </a>
+                <!-- <button class="deleteBtn" onclick="deleteRestaurantCard(this)">X</button> -->
+                <button class="deleteBtn" id="<%= restaurant.id %>">Delete</button>
+            </div>
+        <% }); %>            
+    </div>
 </body>
 </html>

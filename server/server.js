@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { attractionRouter } from './routes/attractions.js';
 import { restaurantRouter } from './routes/api.js';
-import { getRestaurants } from './data/restaurants.js';
+import { getRestaurant } from './data/restaurants.js';
 
 const app = express();
 
@@ -29,7 +29,6 @@ app.get('/', (req, res) => {
     console.log(req)
 });
 
-
 // new_restaurant page call (.html call)
 // Is just going to be adding our new restaurants here.
 app.get("/new_restaurant", (req, res) => {
@@ -38,9 +37,9 @@ app.get("/new_restaurant", (req, res) => {
 
 // restaurant page (.html call)
 // Will be displaying all of our restaurants that are added and not the items deleted.
-app.get('/restaurant', (req, res) => {
-    const restaurantData = getRestaurants();
-    console.log(restaurantData);
+app.get('/restaurant', async (req, res) => {
+    // this restaurant data is what will be uploaded and utilized by the .ejs file.
+    const restaurantData = await getRestaurant();
     
     // Uses our restaurants.ejs in views directory to use our restaurant data from restaurants.js
     res.render('restaurants', { restaurantData });

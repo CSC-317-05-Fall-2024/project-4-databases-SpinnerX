@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log("Submit Clicked!");
 
         const name = document.getElementById('restaurantName').value;
-        const phone = document.getElementById('phoneNumber').value;
+        const phone = document.getElementById('phone').value;
         const address = document.getElementById('address').value;
         const photo = document.getElementById('photoUrl').value || 'https://picsum.photos/200/300'; // Fallback image
 

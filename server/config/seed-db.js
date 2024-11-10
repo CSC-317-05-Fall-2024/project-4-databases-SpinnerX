@@ -21,7 +21,7 @@ const createTables = async () => {
             CREATE TABLE IF NOT EXISTS restaurants (
                 id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
                 name TEXT NOT NULL,
-                phone_number TEXT NOT NULL,
+                phone TEXT NOT NULL,
                 address TEXT NOT NULL,
                 photo TEXT
             );
@@ -44,10 +44,8 @@ const insertData = async () => {
     try {
         console.log('adding initial data...');
         const insertQuery = `
-        INSERT INTO restaurants (name, phone_number,address, photo) VALUES 
-            ('McDonalds', '(123) 456-9000', '1965 Hollow Way San Francisco, United States', 'https://picsum.com/200/400');
-
-        INSERT INTO reviews (rating, content,restaurant_id) VALUES (5, 'This is a testing review.', 1);
+            INSERT INTO restaurants (name, phone,address, photo) VALUES ('McDonalds', '(123) 456-9000', '1965 Hollow Way San Francisco, United States', 'https://picsum.com/200/400');
+            INSERT INTO reviews (rating, content,restaurant_id) VALUES (5, 'This is a testing review.', 1);
         `;
         await pool.query(insertQuery);
     } catch (error) {

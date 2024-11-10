@@ -1,70 +1,40 @@
 import {pool} from "../config/database.js";
 
-let restaurantData = [
-    {
-        "id": 0,
-        "name": "HogWars",
-        "phone": "123-456-7891",
-        "address": "sfsu-address",
-        "photo": "https://picsum.photos/200/300"
-    },
-    {
-        "id": 1,
-        "name": "BearDiner",
-        "phone": "789-123, 4567",
-        "address": "funny-address",
-        "photo": "https://picsum.photos/200/300"
-    },
-    {
-        "id": 2,
-        "name": "BurgerDiner",
-        "phone": "567-891-2345",
-        "address": "sfsu-address",
-        "photo": "https://picsum.photos/200/300"
-    }
-];
-
-let lastId = restaurantData.length-1;
-
-const getNextId = () => {
-    lastId += 1;
-    return lastId;
+export async function getRestaurant() {
+  try {
+    const result = await pool.query('SELECT * FROM restaurants'); // Query to fetch all restaurants
+    return result.rows;  // Return the rows 
+  } catch (error) {
+    console.error('Error fetching restaurants:', error);
+    throw error;
+  }
 }
-
-// Get a list of restaurants
-const getRestaurants = () => {
-    return restaurantData;
-};
 
 
 // Get a restaurant by id
-const getRestaurant = (id) => {
-    return restaurantData.find(restaurant => restaurant.id == id);
-};
+// const getRestaurant = (id) => {
+    // return restaurantData.find(restaurant => restaurant.id == id);
+// };
 
 // Create a new restaurant entry
-const createRestaurant = async (newRestaurant) => {
-    // const new_restaurant_data = {
-    //     id: getNextId(),
-    //     ...newRestaurant
-    // }
-    const { name, phone, address, photoUrl } = newRestaurant;
-    const created_restaurant = await pool.query('INSERT INTO restaurants ( name, phone, address, photo) VALUES ($1, $2, $3, $4) RETURNING *', [name, phone, address, photoUrl]);
-    // console.log(`Results ====> ${created_restaurant}`);
-    // restaurantData.push(new_restaurant_data);
-    // return new_restaurant_data;
+export async function createRestaurant(newRestaurant){
+    const { name, phone, address, photo } = newRestaurant;
+    try{
+        const result = await pool.query('INSERT INTO restaurants (name, phone, address, photo) VALUES ($1, $2, $3, $4) RETURNING *', [name, phone, address, photo]);
+        return result.rows[0];
+    }
+    catch(error){
+        console.error(`Error creating restaurant: ${error}`);
+    }
 };
 
 // Delete a restaurant by id
-const deleteRestaurant = (id) => {
-    const toDelete = restaurantData.find(restaurant => restaurant.id != id);
-
-    if(!toDelete){
-        throw Error(`Restaurant ${id} was not found!`);
+export async function deleteRestaurant(id){
+    try {
+        const results = await pool.query('DELETE FROM restaurants WHERE id = $1', [id])
+        return results.rowCount;
+    } catch (error) {
+        console.error( error.message )
     }
-
-    // restaurantData = restaurantData.filter(restaurant => restaurant.id != id);
-    return toDelete;
 };
 
-export { getRestaurants, getRestaurant, createRestaurant, deleteRestaurant };
