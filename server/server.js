@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { attractionRouter } from './routes/attractions.js';
 import { restaurantRouter } from './routes/api.js';
-import { getRestaurant } from './data/restaurants.js';
+import { getAllRestaurantReviews, getRestaurant, getRestaurantReview } from './data/restaurants.js';
 
 const app = express();
 
@@ -40,9 +40,11 @@ app.get("/new_restaurant", (req, res) => {
 app.get('/restaurant', async (req, res) => {
     // this restaurant data is what will be uploaded and utilized by the .ejs file.
     const restaurantData = await getRestaurant();
-    
+    // const restaurantReviews = await getRestaurantReview();
+    const restaurantReviews = await getAllRestaurantReviews();
     // Uses our restaurants.ejs in views directory to use our restaurant data from restaurants.js
-    res.render('restaurants', { restaurantData });
+    res.render('restaurants', { restaurantData, restaurantReviews });
+    // res.render('restaurantReviews', { restaurantReviews });
 
 });
 

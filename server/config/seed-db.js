@@ -44,8 +44,11 @@ const insertData = async () => {
     try {
         console.log('adding initial data...');
         const insertQuery = `
-            INSERT INTO restaurants (name, phone,address, photo) VALUES ('McDonalds', '(123) 456-9000', '1965 Hollow Way San Francisco, United States', 'https://picsum.com/200/400');
+            INSERT INTO restaurants (name, phone,address, photo) VALUES ('McDonalds', '(123) 456-9000', '1965 Hollow Way San Francisco, United States', 'https://picsum.photos/200/200');
             INSERT INTO reviews (rating, content,restaurant_id) VALUES (5, 'This is a testing review.', 1);
+
+            INSERT INTO restaurants (name, phone, address, photo) VALUES ('Wendys', '(246) 891-2455', 'Fifth Street, United States', 'https://picsum.photos/200/300');  
+            INSERT INTO reviews (rating, content, restaurant_id) VALUES (5, 'This is the second review.', 2); 
         `;
         await pool.query(insertQuery);
     } catch (error) {

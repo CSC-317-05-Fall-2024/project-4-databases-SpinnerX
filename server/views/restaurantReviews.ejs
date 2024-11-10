@@ -22,29 +22,16 @@
     <div class="card-container" id="cardContainer"></div>
     <div class="restaurant-list">
         <!-- restaurantData is defined by our javascript that renders our data get sent to this .ejs file. -->
-        <% restaurantData.forEach(function(restaurant) { %>
-            <div class="restaurant-card" data-id="<%= restaurant.id %>">
-                <a href="/restaurant/<%= restaurant.id %>" class="restaurant-link">
-                    <h2><%= restaurant.name %></h2>
-                    <p><strong>Address:</strong> <%= restaurant.address %></p>
-                    <p><strong>Contact Info:</strong> <%= restaurant.phone %></p>
-                    <img src="<%= restaurant.photo %>" alt="<%= restaurant.name %>" class="restaurantimg">
-                </a>
-                <!-- <button class="deleteBtn" onclick="deleteRestaurantCard(this)">X</button> -->
-                <button class="deleteBtn" id="<%= restaurant.id %>">Delete</button>
-            </div>
-        <% }); %>
-
-        <div class="reviews-container" id="reviewsContainer"></div>
         <% restaurantReviews.forEach(function(restaurant) { %>
             <div class="restaurant-card" data-id="<%= restaurant.id %>">
                 <a href="/restaurant/<%= restaurant.id %>" class="restaurant-link">
-                    <a><strong>Rating:</strong> <%= restaurant.rating %></a>
-                    <p><strong>Content:</strong> <%= restaurant.content %></p>
-                    <p><strong>Restaurant ID:</strong> <%= restaurant.phone %></p>
+                    <!-- <h2><%= restaurant.rating %></h2> -->
+                    <p><strong>Restaurant ID: </strong> <%= restaurant.id %></p>
+                    <p><strong>Rating: </strong> <%= restaurant.rating %></p>
+                    <p><strong>Content: </strong> <%= restaurant.content %></p>
                 </a>
             </div>
-        <% }); %>
+        <% }); %>            
     </div>
 </body>
 </html>

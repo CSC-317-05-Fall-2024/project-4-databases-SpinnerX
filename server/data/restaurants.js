@@ -4,17 +4,24 @@ export async function getRestaurant() {
   try {
     const result = await pool.query('SELECT * FROM restaurants'); // Query to fetch all restaurants
     return result.rows;  // Return the rows 
-  } catch (error) {
+  }
+    catch (error) {
     console.error('Error fetching restaurants:', error);
     throw error;
   }
 }
 
+export async function getAllRestaurantReviews(){
+    try{
+        const res = await pool.query('SELECT * FROM reviews');
+        return res.rows;
+    }
+    catch(error){
+        console.error(`Error fetching reviews ${error}`);
+        throw error;
+    }
+}
 
-// Get a restaurant by id
-// const getRestaurant = (id) => {
-    // return restaurantData.find(restaurant => restaurant.id == id);
-// };
 
 // Create a new restaurant entry
 export async function createRestaurant(newRestaurant){
@@ -33,8 +40,18 @@ export async function deleteRestaurant(id){
     try {
         const results = await pool.query('DELETE FROM restaurants WHERE id = $1', [id])
         return results.rowCount;
-    } catch (error) {
+    }
+    catch (error) {
         console.error( error.message )
     }
 };
 
+export async function getRestaurantReview(id){
+    try{
+        const results = await pool.query('SELECT rating, content FROM reviews WHERE restaurant_id = $1',[id]);
+        return results.rows;
+    }
+    catch(error){
+        console.error(`Error Message: ${error.message}`);
+    }
+};
