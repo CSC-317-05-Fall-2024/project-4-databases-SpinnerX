@@ -26,25 +26,36 @@
             <div class="restaurant-card" data-id="<%= restaurant.id %>">
                 <a href="/restaurant/<%= restaurant.id %>" class="restaurant-link">
                     <h2><%= restaurant.name %></h2>
-                    <p><strong>Address:</strong> <%= restaurant.address %></p>
-                    <p><strong>Contact Info:</strong> <%= restaurant.phone %></p>
-                    <img src="<%= restaurant.photo %>" alt="<%= restaurant.name %>" class="restaurantimg">
                 </a>
-                <!-- <button class="deleteBtn" onclick="deleteRestaurantCard(this)">X</button> -->
-                <button class="deleteBtn" id="<%= restaurant.id %>">Delete</button>
-            </div>
-        <% }); %>
+                <p><strong>Address:</strong> <%= restaurant.address %></p>
+                <p><strong>Contact Info:</strong> <%= restaurant.phone %></p>
+                <img src="<%= restaurant.photo %>" alt="<%= restaurant.name %>" class="restaurantimg">
 
-        <div class="reviews-container" id="reviewsContainer"></div>
-        <% restaurantReviews.forEach(function(restaurant) { %>
-            <div class="restaurant-card" data-id="<%= restaurant.id %>">
-                <a href="/restaurant/<%= restaurant.id %>" class="restaurant-link">
-                    <a><strong>Rating:</strong> <%= restaurant.rating %></a>
-                    <p><strong>Content:</strong> <%= restaurant.content %></p>
-                    <p><strong>Restaurant ID:</strong> <%= restaurant.phone %></p>
-                </a>
+                <% const reviews = restaurantReviews.filter(review => review.id == restaurant.id); %>
+                
+                <!-- Rendering the reviews data per restaurant -->
+                <% if (reviews.length > 0){ %>
+                <% reviews.forEach(function(review){ %>
+                <li>
+                    <p><strong>Restaurant ID:</strong> <%= review.id %></p>
+                    <p><strong>Rating:</strong> <%= review.rating %></p>
+                    <p><strong>Content:</strong> <%= review.content %></p>
+                </li>
+                <% }); %>
+                <% } %>
+                
+                <!-- Rendering average reviews per restaurant -->
+                <% const total_reviews = totalAverageRestaurantReviews.filter(review => review.id == restaurant.id); %>
+                <% total_reviews.forEach(function(review){ %>
+                <li>
+                <p><strong>Average Ratings:</strong> <%= review.averageRating %> </p>
+                </li>
+                <% }); %>
+                <button class="deleteBtn" id="<%= restaurant.id %>">Delete</button>
+
             </div>
         <% }); %>
+        
     </div>
 </body>
 </html>

@@ -1,7 +1,5 @@
 // Function to be called when the button is clicked
 
-
-
 // Wait until the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', () => {
     // Target the button by its ID

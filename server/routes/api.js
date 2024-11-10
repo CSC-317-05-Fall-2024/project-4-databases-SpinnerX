@@ -31,9 +31,9 @@ router.delete('/restaurants/:id', async (req, res) => {
     const isDeleted = await deleteRestaurant(restaurantId);
     
     if (isDeleted) {
-        res.status(200).json({ message: 'Restaurant deleted successfully' });
+        res.status(200).json({ message: 'Restaurant has been deleted' });
     } else {
-        res.status(404).json({ message: 'Restaurant not found' });
+        res.status(404).json({ message: 'Restaurant not found!' });
     }
 });
 

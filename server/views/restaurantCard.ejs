@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Restaurant Form</title>
+    <!-- Setting CSS style for our website -->
+    <link rel="stylesheet" href="../styles.css">
+    <script src="scripts/deleteRestaurants.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+    <!-- Creating components for our navigation bar -->
+    <div class="navbar">
+        <a href="/">Home</a>
+        <a href="/attractions">Attractions</a>
+        <a href="/restaurant">Restaurants</a>
+        <a href="/new_restaurant">New Restaurant</a>
+    </div>
+    <div class="card-container" id="cardContainer"></div>
+    <div class="restaurant-list">
+        <!-- restaurantData is defined by our javascript that renders our data get sent to this .ejs file. -->
+        <div class="restaurant-card" data-id="restaurant.id">
+            <p><strong>Name:</strong> <%= restaurant.name %> </p>
+            <p><strong>Address:</strong> <%= restaurant.address %></p>
+            <p><strong>Contact Info:</strong> <%= restaurant.phone %></p>
+            <img src="<%= restaurant.photo %>" alt="<%= restaurant.name %>" class="restaurantimg">
+        </div>
+
+        <div class="reviews-container" id="reviewsContainer">
+
+            <% restaurantReviews.forEach(function(review){ %>
+                <div>
+                    <!-- <a href="/restaurant/<%= review.id %>" class="restaurant-link"> -->
+                    <% if(review.restaurant_id == restaurant.id){ %>
+                    <p><strong>ID:</strong> <%= review.restaurant_id %></p>
+                    <p><strong>Rating:</strong> <%= review.rating %></p>
+                    <p><strong>Content:</strong> <%= review.content %></p>
+                    <% } %>
+                </div>
+            <!-- <p><strong>Restaurant ID:</strong> <%= review.id %></p> -->
+            <!-- <p><strong>Rating:</strong> <%= review.rating %></p> -->
+            <!-- <p><strong>Content:</strong> <%= review.content %></p> -->
+            <!-- </a> -->
+
+            <% }); %>
+        </div>
+    </div>
+</body>
+</html>

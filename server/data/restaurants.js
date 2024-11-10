@@ -1,5 +1,6 @@
 import {pool} from "../config/database.js";
 
+// fetches all of our restaurants from db
 export async function getRestaurant() {
   try {
     const result = await pool.query('SELECT * FROM restaurants'); // Query to fetch all restaurants
@@ -11,6 +12,7 @@ export async function getRestaurant() {
   }
 }
 
+// Returns all of our restaurant reviews.
 export async function getAllRestaurantReviews(){
     try{
         const res = await pool.query('SELECT * FROM reviews');
@@ -43,15 +45,5 @@ export async function deleteRestaurant(id){
     }
     catch (error) {
         console.error( error.message )
-    }
-};
-
-export async function getRestaurantReview(id){
-    try{
-        const results = await pool.query('SELECT rating, content FROM reviews WHERE restaurant_id = $1',[id]);
-        return results.rows;
-    }
-    catch(error){
-        console.error(`Error Message: ${error.message}`);
     }
 };
