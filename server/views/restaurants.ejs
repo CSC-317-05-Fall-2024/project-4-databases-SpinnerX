@@ -34,15 +34,16 @@
                 <% const reviews = restaurantReviews.filter(review => review.id == restaurant.id); %>
                 
                 <!-- Rendering the reviews data per restaurant -->
-                <% if (reviews.length > 0){ %>
-                <% reviews.forEach(function(review){ %>
-                <li>
-                    <p><strong>Restaurant ID:</strong> <%= review.id %></p>
-                    <p><strong>Rating:</strong> <%= review.rating %></p>
-                    <p><strong>Content:</strong> <%= review.content %></p>
-                </li>
-                <% }); %>
-                <% } %>
+                <!-- Removing this from being shown on the front-end because I think this is best when shown if clicked on to their own separate front-end websites. -->
+                <!-- <% if (reviews.length > 0){ %> -->
+                <!-- <% reviews.forEach(function(review){ %> -->
+                <!-- <li> -->
+                <!--     <p><strong>Restaurant ID:</strong> <%= review.id %></p> -->
+                <!--     <p><strong>Rating:</strong> <%= review.rating %></p> -->
+                <!--     <p><strong>Content:</strong> <%= review.content %></p> -->
+                <!-- </li> -->
+                <!-- <% }); %> -->
+                <!-- <% } %> -->
                 
                 <!-- Rendering average reviews per restaurant -->
                 <% const total_reviews = totalAverageRestaurantReviews.filter(review => review.id == restaurant.id); %>
