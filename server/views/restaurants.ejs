@@ -31,7 +31,7 @@
                 <p><strong>Contact Info:</strong> <%= restaurant.phone %></p>
                 <img src="<%= restaurant.photo %>" alt="<%= restaurant.name %>" class="restaurantimg">
 
-                <% const reviews = restaurantReviews.filter(review => review.id == restaurant.id); %>
+                <% const reviews = restaurantReviews.filter(review => review.restaurant_id == restaurant.id); %>
                 
                 <!-- Rendering the reviews data per restaurant -->
                 <!-- Removing this from being shown on the front-end because I think this is best when shown if clicked on to their own separate front-end websites. -->
@@ -45,6 +45,21 @@
                 <!-- <% }); %> -->
                 <!-- <% } %> -->
                 
+                <% reviews.forEach(function(review){ %>
+                <div>
+                    <!-- <a href="/restaurant/<%= review.id %>" class="restaurant-link"> -->
+                    <% if(review.restaurant_id == restaurant.id){ %>
+                    <p><strong>ID:</strong> <%= review.restaurant_id %></p>
+                    <p><strong>Rating:</strong> <%= review.rating %></p>
+                    <p><strong>Content:</strong> <%= review.content %></p>
+                    <% } %>
+                </div>
+                <!-- <p><strong>Restaurant ID:</strong> <%= review.id %></p> -->
+                <!-- <p><strong>Rating:</strong> <%= review.rating %></p> -->
+                <!-- <p><strong>Content:</strong> <%= review.content %></p> -->
+                <!-- </a> -->
+
+                <% }); %>
                 <!-- Rendering average reviews per restaurant -->
                 <% const total_reviews = totalAverageRestaurantReviews.filter(review => review.id == restaurant.id); %>
                 <% total_reviews.forEach(function(review){ %>
